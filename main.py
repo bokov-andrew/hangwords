@@ -1,17 +1,17 @@
 import random, pgzero, pgzrun, os
 PREFIX = 'hangman'
-HANGMAN = [xx.replace('.png', '') for xx in os.listdir('images')]
+HANGMAN = [xx.replace('.png', '') for xx in os.listdir('images') if xx.startswith('hang')]
 HANGMAN.sort()
 HHEIGHT = Actor(HANGMAN[0]).height
 hpix = 0
 winlose = None
-words = "/home/a/words/current_spelling_words.txt"
+words = "./words/current_spelling_words.txt"
 spelling = open(words, "r").read().splitlines()[1:]
 current_word = random.choice(spelling)
 placeholder = ["_"] * len(current_word)
 
 def on_key_down(key,mod,unicode):
-    global current_word, spelling, placeholder, hpix
+    global current_word, spelling, placeholder, hpix, winlose
     if winlose:
         winlose = None
     elif unicode in current_word: # if you guessed right
@@ -23,9 +23,13 @@ def on_key_down(key,mod,unicode):
             # This triggers when you guessed the whole word
             hpix = 0
             spelling.remove(current_word)
-            current_word = random.choice(spelling)
-            placeholder = ["_"] * len(current_word)
-            winlose = 'victory'
+            if spelling:
+                current_word = random.choice(spelling)
+                placeholder = ["_"] * len(current_word)
+                winlose = 'victory'
+            else:
+                print("w00t")
+                return()
     else: # if you guessed wrong...
         hpix += 1
         if hpix == len (HANGMAN):

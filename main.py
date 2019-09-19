@@ -45,7 +45,7 @@ def draw():
         screen.blit(winlose, (1,1))
     else:
         screen.blit(HANGMAN[hpix], (1,1))
-    screen.draw.text(current_word, (20,HHEIGHT + 10))
+    #screen.draw.text(current_word, (20,HHEIGHT + 10))
     screen.draw.text(''.join(placeholder), (20,HHEIGHT + 30))
     
 pgzrun.go()

@@ -9,13 +9,16 @@ winlose = None
 words = "./words/current_spelling_words.txt"
 spelling = open(words, "r").read().splitlines()[1:]
 spelling = list(set(spelling))
+ttlnumber = len(spelling)
+dftnumber = 0
 current_word = random.choice(spelling)
 placeholder = ["_"] * len(current_word)
 guessedlett = []
 guessedw = []
 
 def on_key_down(key,mod,unicode):
-    global current_word, spelling, placeholder, hpix, winlose, guessedlett, guessedw
+    global current_word, spelling, placeholder, hpix, winlose
+    global guessedlett, guessedw, dftnumber
     if winlose:
         winlose = None
     elif unicode in current_word: # if you guessed right
@@ -40,11 +43,13 @@ def on_key_down(key,mod,unicode):
         hpix += 1
         guessedlett += [unicode]
         if hpix == len (HANGMAN):
+            # Hangman dies! (again)
             print('incorrect!')
             hpix = 0
             current_word = random.choice(spelling)
             placeholder = ["_"] * len(current_word)
             guessedlett = []
+            dftnumber += 1
             winlose = 'defeat'
             
 def draw():
@@ -58,6 +63,8 @@ def draw():
     screen.draw.text(" ".join(guessedlett),(20,HHEIGHT + 45),
                      color = (255,0,0))
     screen.draw.text('\n'.join(guessedw), (HWIDTH + 40, 10))
-    
+    screen.draw.text(str(len(guessedw))+'/',(20,HHEIGHT + 60),color = (0,255,0))
+    screen.draw.text(str(dftnumber)+'/',(40,HHEIGHT + 60),color = (255,0,0))
+    screen.draw.text(str(ttlnumber),(60,HHEIGHT + 60),color = (0,0,255))
 pgzrun.go()
 

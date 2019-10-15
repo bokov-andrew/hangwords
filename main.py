@@ -7,7 +7,12 @@ HWIDTH = Actor(HANGMAN[0]).width
 hpix = 0
 winlose = None
 words = "./words/current_spelling_words.txt"
-spelling = [xx.split() for xx in open(words,"r").read().splitlines()[1:]]
+header = "current spelling words"
+# this reads in a file and then splits it by whitespace
+spelling = [xx.split() for xx in open(words,"r").read().splitlines()
+            # ...omitting the heading if there is one
+            if xx != header]
+# the above gives us a list of lists, the next line merges them into one big list
 spelling = list(set(sum(spelling,[])))
 ttlnumber = len(spelling)
 dftnumber = 0

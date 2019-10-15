@@ -1,6 +1,7 @@
 import random, pgzero, pgzrun, os
 PREFIX = 'hangman'
-HANGMAN = [xx.replace('.png', '') for xx in os.listdir('images') if xx.startswith('hang')]
+HANGMAN = [xx.replace('.png', '') for xx in os.listdir('images')
+           if xx.startswith('hang')]
 HANGMAN.sort()
 HHEIGHT = Actor(HANGMAN[0]).height
 HWIDTH = Actor(HANGMAN[0]).width
@@ -12,7 +13,7 @@ header = "current spelling words"
 spelling = [xx.split() for xx in open(words,"r").read().splitlines()
             # ...omitting the heading if there is one
             if xx != header]
-# the above gives us a list of lists, the next line merges them into one big list
+# the above gives us a list of lists, the next line merges them to one big list
 spelling = list(set(sum(spelling,[])))
 ttlnumber = len(spelling)
 dftnumber = 0
@@ -71,5 +72,6 @@ def draw():
     screen.draw.text(str(len(guessedw))+'/',(20,HHEIGHT + 60),color = (0,255,0))
     screen.draw.text(str(dftnumber)+'/',(40,HHEIGHT + 60),color = (255,0,0))
     screen.draw.text(str(ttlnumber),(60,HHEIGHT + 60),color = (0,0,255))
+    
 pgzrun.go()
 

@@ -62,16 +62,20 @@ def draw():
     screen.clear()
     if winlose:
         screen.blit(winlose, (1,1))
+        screen.draw.text("type any key",
+                         midtop=(screen.surface.get_width()/2,
+                                 screen.surface.get_height()/2),
+                         fontsize=50)
     else:
         screen.blit(HANGMAN[hpix], (1,1))
-    #screen.draw.text(current_word, (20,HHEIGHT + 10))
-    screen.draw.text(''.join(placeholder), (20,HHEIGHT + 30))
-    screen.draw.text(" ".join(guessedlett),(20,HHEIGHT + 45),
-                     color = (255,0,0))
-    screen.draw.text('\n'.join(guessedw), (HWIDTH + 40, 10))
-    screen.draw.text(str(len(guessedw))+'/',(20,HHEIGHT + 60),color = (0,255,0))
-    screen.draw.text(str(dftnumber)+'/',(40,HHEIGHT + 60),color = (255,0,0))
-    screen.draw.text(str(ttlnumber),(60,HHEIGHT + 60),color = (0,0,255))
+        #screen.draw.text('test', (screen.surface.get_width()/2,500),fontsize=50,color=(255,0,0))
+        screen.draw.text(''.join(placeholder), (20,HHEIGHT + 30))
+        screen.draw.text(" ".join(guessedlett),(20,HHEIGHT + 45),
+                         color = (255,0,0))
+        screen.draw.text('\n'.join(guessedw), (HWIDTH + 40, 10))
+        screen.draw.text(str(len(guessedw))+'/',(20,HHEIGHT + 60),color = (0,255,0))
+        screen.draw.text(str(dftnumber)+'/',(40,HHEIGHT + 60),color = (255,0,0))
+        screen.draw.text(str(ttlnumber),(60,HHEIGHT + 60),color = (0,0,255))
     
 pgzrun.go()
 
